@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<style>
+  #app {
+    margin-top: -200px;
+  }
+
+  .box_ {
+    width: 120px;
+    height: 45px;
+    position: relative;
+    right: -600px;
+    margin-top: 260px;
+    border-radius: 5%;
+    background-color: rgb(175, 165, 165);
+    display: block;
+  }
+
+  .box_>span {
+    position: relative;
+    top: 10px;
+    right: -20px;
+  }
+
+  .img {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    right: -419px;
+    margin-top: 23px;
+    border-radius: 5%;
+    background-color: rgb(175, 165, 165);
+    display: block;
+  }
+</style>
+
+<body>
+  <div id="app">
+    <input type="file" id="box" style="display:none;" @change="hand">
+    <label for="box" class="box_">
+      <span>上传图片</span>
+    </label>
+    <img :src=imgURL class='img' v-if='imgURL'>
+    <!-- <button for="box" style="width:30px; height:30px">选择文件</button> -->
+  </div>
+
+
+
+
+
+
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+  <!-- <script src="main.js"></script> -->
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          imgURL: '',
+          URL: '',
+        }
+      },
+      methods: {
+        hand(e) {
+          //获得浏览器的URL属性
+          this.URL = window.URL || window.webkitURL;
+          //打印一下看看有没有
+          console.log('0-90' + this.URL);
+          // 通过 file 生成目标 url
+          this.imgURL = this.URL.createObjectURL(e.target.files[0]);
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
